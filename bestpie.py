@@ -58,7 +58,7 @@ def pi():
 
     dpie = str(pie(k))[Slice]
     if filewrite:
-        x = open("Decimal-Pi.txt", "a")
+        x = open("pi_dec_1m.txt", "a")
         x.write("3.\n")
         for i in range(0, int((len(dpie) - 2) / 50 + 0.5) + 1):
             Nslice = slice(i * 50 + 2, (i + 1) * 50 + 2)

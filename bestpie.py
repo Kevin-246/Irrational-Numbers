@@ -34,7 +34,7 @@ def pi():
         pass
 
     Slice = slice(0, -S)
-    time1 = datetime.now()
+
     def fact(n):
         j = D(1)
         for i in range(1, n+1):
@@ -45,27 +45,43 @@ def pi():
         result = fact(4 * k) * (1103 + 26390 * k) / (fact(k) ** 4 * D(396.0) ** (4 * k))
         return result
 
+    def product2(k):
+        result = (-1) ** k * fact(6 * k) / (fact(k) ** 3 * fact(3 * k)) * (13591409 + 545140134 * k) / D(640320) ** (3 * k)
+        return result
+
     def sum1(k):
         result = D(0)
         for i in range(k+1):
             result += product1(i)
         return result
 
+    def sum2(k):
+        result = D(0)
+        for i in range(k+1):
+            result += product2(i)
+        return result
+
     def pie(k=500):
         pi = sum1(k) / 9801 * D(8.0) ** D(0.5)
         return pi ** -1
-    time2 = datetime.now()
 
+    def pie2(k=500):
+        pi = sum2(k) * D(10005).sqrt() / 4270934400
+        return pi ** -1
+
+    time1 = datetime.now()
     dpie = str(pie(k))[Slice]
+    time2 = datetime.now()
+    dpie2 = str(pie2(k))[Slice]
     if filewrite:
-        x = open("pi_dec_1m.txt", "a")
+        x = open("Decimal-Pi.txt", "a")
         x.write("3.\n")
         for i in range(0, int((len(dpie) - 2) / 50 + 0.5) + 1):
             Nslice = slice(i * 50 + 2, (i + 1) * 50 + 2)
             x.write(dpie[Nslice])
             x.write("\n")
     aslice = slice(0, int(piamount - S) + 2)
-    api = open("data/Pi - Dec.txt", "r")
+    api = open("data/pi_dec_1m.txt", "r")
     acpie = api.read()[aslice]
     api.close()
     print("Calculated PI: " + dpie)
@@ -107,6 +123,8 @@ def golden_ratio():
         print("Time Elapsed: " + str(time2 - time1))
 
 
+print(pi())
+
 while True:
     irrational_number = input("Which Irrational Number Do You Want To Calculate: ").lower()
     if irrational_number == "pi":
@@ -116,4 +134,4 @@ while True:
     elif irrational_number == "e":
         e()
     else:
-        print("We Don't Have That Irrational Number In Our Code!! If You Want To Add It Go To https://bit.ly/3pr6YPZ")
+        print("We Don't Have That Irrational Number In Our Code!!")
